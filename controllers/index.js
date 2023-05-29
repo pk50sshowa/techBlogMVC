@@ -11,9 +11,9 @@ const commentRoutes = require("./api/commentRoutes");
 router.use("/api/comments", commentRoutes);
 
 const frontEnd = require("./frontendRoutes");
-router.use("/",frontEnd);
+router.use("/", frontEnd);
 
-router.get("/showsessions", (req,res) => {
+router.get("/showsessions", (req, res) => {
     res.json(req.session);
 });
 
