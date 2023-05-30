@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { User, Blog, Comment } = require("../../models");
+const { User, Post, Comment } = require("../../models");
 
 router.get("/", (req, res) => {
-    Comment.findAll({ include: [User, Blog] })
+    Comment.findAll({ include: [User, Post] })
         .then(dbComments => {
             res.json(dbComments);
         })
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    Comment.findByPk(req.params.id, { include: [User, Blog] })
+    Comment.findByPk(req.params.id, { include: [User, Post] })
         .then(dbComment => {
             res.json(dbComment);
         })

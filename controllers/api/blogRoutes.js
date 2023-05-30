@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { User, Blog, Comment } = require("../../models");
+const { User, Post, Comment } = require("../../models");
 const withAuth = require('../../utils/helpers.js');
 
 router.get("/", (req, res) => {
-    Blog.findAll({ inlcude: [User, Comment] })
+    Post.findAll({ inlcude: [User, Comment] })
         .then(dbBlogs => {
             res.json(dbBlogs);
         })
@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ msg: "Please login!" });
     }
-    Blog.create({
+    Post.create({
         title: req.body.title,
         content: req.body.content,
         userId: req.session.user.id

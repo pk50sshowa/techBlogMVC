@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { User, Blog, Comment } = require('../models');
+const { User, Post, Comment } = require('../models');
 
 router.get('/', (req, res) => {
-    Blog.findAll({ include: [User] }).then(blogs => {
+    Post.findAll({ include: [User] }).then(blogs => {
         const hbsBlogs = blogs.map(blog => blog.get({ plain: true }))
         const loggedIn = req.session.user ? true : false;
         res.render('home', { blogs: hbsBlogs, loggedIn, username: req.session.user?.username })
@@ -26,7 +26,7 @@ router.get("/dashboard", (req, res) => {
         return res.redirect('/login')
     }
     User.findByPk(req.session.user.id, {
-        include: [Blog, Comment]
+        include: [Post, Comment]
     }).then(userData => {
         const hbsData = userData.get({ plain: true })
         hbsData.loggedIn = req.session.user ? true : false
@@ -38,7 +38,7 @@ router.get("/blogs/:id", (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login')
     }
-    Blog.findByPk(req.params.id, { include: [User, { model: Comment, include: [User] }] })
+    Post.findByPk(req.params.id, { include: [User, { model: Comment, include: [User] }] })
         .then(dbBlog => {
             const hbsBlog = dbBlog.get({ plain: true });
             const loggedIn = req.session.user ? true : false;
