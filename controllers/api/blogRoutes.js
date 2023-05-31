@@ -25,19 +25,19 @@ router.get("/:id", (req, res) => {
         });
 });
 
-router.post("/", (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).json({ msg: "Please login!" });
-    }
+router.post("/", withAuth, (req, res) => {
+    console.log(req.session.userId);
+    console.log(req.body);
     Post.create({
         title: req.body.title,
         content: req.body.content,
-        userId: req.session.user.id
+        user_id: req.session.userId,
     })
-        .then(newBlog => {
+        .then((newBlog) => {
+            console.log(newBlog);
             res.json(newBlog);
         })
-        .catch(err => {
+        .catch((err) => {
             console.log(err);
             res.status(500).json({ msg: "An error occured", err });
         });
