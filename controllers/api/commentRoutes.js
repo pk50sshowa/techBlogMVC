@@ -28,12 +28,14 @@ router.post("/", (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ msg: "Please login first!" });
     }
+    console.log(req.body);
     Comment.create({
         body: req.body.body,
         userId: req.session.user.id,
         blogId: req.body.blogId
     })
         .then(newComment => {
+            console.log(newComment);
             res.json(newComment);
         })
         .catch(err => {

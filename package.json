@@ -8,7 +8,7 @@
     "createseed": "node seeds/createSeeds.js",
     "start": "node server.js",
     "watch": "nodemon server.js",
-    "resetdb": "mysql -u root -p <  ./db/schema.sql",
+    "resetdb": "mysql -u root <  ./db/schema.sql",
     "seed": "node seeds/seed.js"
   },
   "author": "Paul Koehler",
