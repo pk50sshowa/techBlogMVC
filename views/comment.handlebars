@@ -3,7 +3,7 @@
     <section class="card">
         <div class="card-body">
             <h3 class="card-title">{{hbsBlog.title}}</h3>
-            <h5>Posted by {{hbsBlog.user.username}} on {{hbsBlog.createdAt}}</h5>
+            <h5>Posted by {{hbsBlog.user.username}} on {{hbsBlog.date_created}}</h5>
             <p class="card-text">{{hbsBlog.content}}</p>
         </div>
     </section>
@@ -11,7 +11,7 @@
     <section class="card">
         <div class="card-body">
             <p>Comment</p>
-            <p class="card-text">{{body}}</p>
+            <p class="card-text">{{hbsBlog.comment}}</p>
         </div>
     </section>
 {{/each}}

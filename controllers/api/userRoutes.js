@@ -39,6 +39,10 @@ router.post("/", (req, res) => {
         })
         .then((dbUserData) => {
             req.session.save(() => {
+                req.session.user = {
+                    id: dbUserData.id,
+                    username: dbUserData.username
+                }
                 req.session.userId = dbUserData.id;
                 req.session.username = dbUserData.username; 
                 req.session.loggedIn = true;
@@ -61,11 +65,17 @@ router.post("/login", (req, res) => {
             return res.status(400).json({ msg: "Wrong login credentials." })
         }
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-            req.session.user = {
-                id: foundUser.id,
-                username: foundUser.username
-            }
-            return res.json(foundUser)
+            req.session.save ((  ) => {
+                req.session.user = {
+                    id: foundUser.id,
+                    username: foundUser.username
+                }
+                req.session.userId = foundUser.id;
+                req.session.username = foundUser.username; 
+                req.session.loggedIn = true;
+                return res.json(foundUser);
+            });
+            // return res.json(foundUser)
         } else {
             return res.status(400).json({ msg: "Wrong login credentials." })
         }

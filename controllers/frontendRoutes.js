@@ -5,6 +5,7 @@ const { User, Post, Comment } = require('../models');
 router.get('/', (req, res) => {
     Post.findAll({ include: [User] }).then(blogs => {
         const hbsBlogs = blogs.map(blog => blog.get({ plain: true }))
+        console.log(hbsBlogs);
         const loggedIn = req.session.user ? true : false;
         res.render('home', { blogs: hbsBlogs, loggedIn, username: req.session.user?.username })
     })

@@ -37,6 +37,7 @@ newBlog.addEventListener("submit", event => {
             "Content-Type":"application/json"
         }
     }).then(res=>{
+        console.log(res);
         if(res.ok){
             createNew.setAttribute("hidden", "false");
             location.reload();

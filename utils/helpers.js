@@ -1,9 +1,6 @@
-const withAuth = (req, res, next) => {
-    if (!req.session.userId) {
-        res.redirect('/login');
-    } else {
-        next();
+module.exports = {
+    format_date: (date) => {
+        // Date format: MM/DD/YYYY
+        return date.toLocaleDateString();
     }
 };
-
-module.exports = withAuth;
