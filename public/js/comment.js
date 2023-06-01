@@ -1,8 +1,8 @@
 document.querySelector("#newComment").addEventListener("submit", event=>{
     event.preventDefault();
     const comment = {
-        body:document.querySelector("#comment").value,
-        blogId:document.querySelector("#hiddenCommentId").value,
+        comment:document.querySelector("#comment").value,
+        blog_id:document.querySelector("#hiddenCommentId").value,
     }
     fetch("/api/comments",{
         method:"POST",

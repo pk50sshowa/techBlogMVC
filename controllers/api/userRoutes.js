@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
                     id: dbUserData.id,
                     username: dbUserData.username
                 }
-                req.session.userId = dbUserData.id;
+                req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username; 
                 req.session.loggedIn = true;
                 res.json(dbUserData);
@@ -70,7 +70,7 @@ router.post("/login", (req, res) => {
                     id: foundUser.id,
                     username: foundUser.username
                 }
-                req.session.userId = foundUser.id;
+                req.session.user_id = foundUser.id;
                 req.session.username = foundUser.username; 
                 req.session.loggedIn = true;
                 return res.json(foundUser);

@@ -30,9 +30,9 @@ router.post("/", (req, res) => {
     }
     console.log(req.body);
     Comment.create({
-        comment: req.body.body,
-        userId: req.session.user.id,
-        blogId: req.body.blogId
+        comment: req.body.comment,
+        user_id: req.session.user_id,
+        blog_id: req.body.blog_id
     })
         .then(newComment => {
             console.log(newComment);

@@ -26,7 +26,7 @@ router.get("/dashboard", (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login')
     }
-    User.findByPk(req.session.user.id, {
+    User.findByPk(req.session.user_id, {
         include: [Post, Comment]
     }).then(userData => {
         const hbsData = userData.get({ plain: true })
@@ -45,10 +45,11 @@ router.get("/blogs/:id", (req, res) => {
             const loggedIn = req.session.user ? true : false;
             console.log('==============');
             console.log(hbsBlog);
-            if (dbBlog.userId != req.session.user.id) {
+            if (dbBlog.user.id != req.session.user_id) {
                 return res.render('comment', { hbsBlog, loggedIn, username: req.session.user?.username })
             }
-            res.render("updateDelete", { hbsBlog, loggedIn, username: req.session.user?.username })
+            res.render("updateDelete", { hbsBlog, loggedIn, username: req.session.user?.username });
+            res.render('comment', { hbsBlog, loggedIn, username: req.session.user?.username });
         })
         .catch(err => {
             console.log(err);

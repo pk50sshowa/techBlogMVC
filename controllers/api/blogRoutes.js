@@ -27,12 +27,12 @@ router.get("/:id", (req, res) => {
 
 router.post("/", withAuth, (req, res) => {
     console.log('\n\n\n\n\n');
-    console.log("Line 30", req.session.userId);
+    console.log("Line 30", req.session.user_id);
     // console.log(req.body);
     Post.create({
         title: req.body.title,
         content: req.body.content,
-        user_id: req.session.userId,
+        user_id: req.session.user_id,
     })
         .then((newBlog) => {
             // console.log(newBlog);
