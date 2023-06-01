@@ -3,7 +3,7 @@ const router = express.Router();
 const { User, Post, Comment } = require("../../models");
 
 router.get("/", (req, res) => {
-    Comment.findAll({ include: [User, Post] })
+    Comment.findAll()
         .then(dbComments => {
             res.json(dbComments);
         })
@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
     }
     console.log(req.body);
     Comment.create({
-        body: req.body.body,
+        comment: req.body.body,
         userId: req.session.user.id,
         blogId: req.body.blogId
     })
